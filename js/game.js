@@ -9,7 +9,7 @@ var GEM_SIZE_SPACED = GEM_SIZE + GEM_SPACING;
 var BOARD_COLS, BOARD_ROWS;
 var MATCH_MIN = 3; // min number of same color gems required in a row to be considered a match
 var GEM_AREA = [.442 * CANV_W, 0.0444444 * CANV_H, .52 * CANV_W, CANV_H * 0.95];
-var SCORE_NEEDED = 300;
+var SCORE_NEEDED = 100;
 var gameOver = false;
 
 // gems
@@ -242,8 +242,8 @@ function update_mouse(pointer, x, y) {
 function make_try_again_screen() {
 
 	try_again_button_image = game.add.sprite(0, 0, "try_again");
-	try_again_button_image.width = 300;
-	try_again_button_image.height = 99;
+	try_again_button_image.width = 385;
+	try_again_button_image.height = 127;
 	try_again_button_image.x = plate.x + plate.width / 2 - try_again_button_image.width / 2 ;
 	try_again_button_image.y = plate.y + plate.height - try_again_button_image.height - 50;
 	try_again_button_image.visible = false;
@@ -286,7 +286,7 @@ function make_win_screen() {
 	
 	win_close_image = game.add.sprite(0, 0, "try_again");
 	win_close_image.width = 300;
-	win_close_image.height = 100;
+	win_close_image.height = 99;
 	win_close_image.x = plate.x + plate.width / 2 - win_close_image.width / 2;
 	win_close_image.y = plate.y + plate.height - win_close_image.height - 50;
 	win_close_image.visible = false;
@@ -479,10 +479,10 @@ function make_start_screen() {
 	
 
 	start_button_image = game.add.sprite(0, 0, "play_now");
-	start_button_image.width = 311;
-	start_button_image.height = 158;
+	start_button_image.width = 385;
+	start_button_image.height = 83;
 	start_button_image.x = plate.x + plate.width / 2 - start_button_image.width / 2 ;
-	start_button_image.y = plate.y + plate.height - start_button_image.height ;
+	start_button_image.y = plate.y + plate.height - start_button_image.height-55 ;
 	start_button_image.visible = false;
 
 	start_button = game.add.button(0, 0, '', start_game);
@@ -574,15 +574,15 @@ function show_try_again_screen() {
 
 function make_stat_text() {
 	moves_text = game.add.text(15, 15, "Moves Remaining: " + moves_left);
-	moves_text.font = 'Courgette';
+	moves_text.font = 'Arial';
 	moves_text.fontSize = 35;
-	moves_text.fill = '#d41c66';
+	moves_text.fill = '#ffffff';
 	moves_text.visible = false;
 
 	score_text = game.add.text(15, 15 + moves_text.height, "Score: " + score);
-	score_text.font = 'Courgette';
+	score_text.font = 'Arial';
 	score_text.fontSize = 35;
-	score_text.fill = '#d41c66';
+	score_text.fill = '#ffffff';
 	score_text.visible = false;
 };
 
