@@ -428,8 +428,8 @@ function hide_win_screen() {
 	follow_text.visible = false;
 	win_banner_text.visible = false;
 	sign_up_image.loadTexture("sign_up");
-	follow_image.loadTexture("follow");
-	win_close_image.loadTexture("win_close");
+	follow_image.loadTexture("facebook");
+	win_close_image.loadTexture("try_again");
 }
 
 function show_win_screen() {
