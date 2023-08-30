@@ -9,7 +9,7 @@ var GEM_SIZE_SPACED = GEM_SIZE + GEM_SPACING;
 var BOARD_COLS, BOARD_ROWS;
 var MATCH_MIN = 3; // min number of same color gems required in a row to be considered a match
 var GEM_AREA = [.442 * CANV_W, 0.0444444 * CANV_H, .52 * CANV_W, CANV_H * 0.95];
-var SCORE_NEEDED = 100;
+var SCORE_NEEDED = 300;
 var gameOver = false;
 
 // gems
