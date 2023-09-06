@@ -82,6 +82,7 @@ function preload() {
 	game.load.audio("lose", "audio/lose.mp3");
 	game.load.audio("gemfall", "audio/gemfall.mp3");
 	game.load.audio('slide', 'audio/slide.mp3');
+	game.load.text('Arial-Rounded', 'assets/Arial-Rounded.ttf');
 }
 var tutorialHand;
 function create() {
@@ -504,8 +505,10 @@ function make_start_screen() {
 	start_button.events.onInputOver.add(over, this);
 	start_button.events.onInputOut.add(out, this);
 
-	start_text_top = game.add.text(0, 0, "Welcome to\nWishes\nMatch 3");
-	start_text_top.font = 'Airal';
+	start_text_top = game.add.text(0, 0, "Welcome to\nWishes\nMatch 3",{
+		FontFace : 'Arial-Rounded'
+	});
+	start_text_top.font = 'Arial-Rounded';
 	start_text_top.fontSize = 55;
 	start_text_top.fill = '#310639'
 	start_text_top.x = plate.x + plate.width / 2 - start_text_top.width / 2;
