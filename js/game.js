@@ -70,6 +70,7 @@ function preload() {
 	game.load.image("dim_background", "image/dim.png");
 	game.load.image("win_banner", "image/win_banner.png");
 	game.load.image("hand", "image/hand.png");
+	game.load.image("help", "image/help.png");
 	game.load.image("facebook", "image/facebook.png");
 	game.load.image("instagram", "image/instagram.png");
 	game.load.image("youtube", "image/youtube.png");
@@ -85,6 +86,8 @@ function preload() {
 	game.load.text('Arial-Rounded', 'assets/Arial-Rounded.ttf');
 }
 var tutorialHand;
+var tutorialHelp;
+var tutorial_text;
 function create() {
 
 	var back = game.add.sprite(0, 0, "background");
@@ -220,7 +223,9 @@ function update() {
 
 		gameOver = true;
 		show_win_screen();
+		win.play();
 		moves_left = 0;
+		music.volume = 0;
 		
 	}
 	
@@ -244,7 +249,7 @@ function make_try_again_screen() {
 
 	try_again_button_image = game.add.sprite(0, 0, "try_again");
 	try_again_button_image.width = 385;
-	try_again_button_image.height = 127;
+	try_again_button_image.height = 83;
 	try_again_button_image.x = plate.x + plate.width / 2 - try_again_button_image.width / 2 ;
 	try_again_button_image.y = plate.y + plate.height - try_again_button_image.height - 50;
 	try_again_button_image.visible = false;
@@ -266,7 +271,7 @@ function make_try_again_screen() {
 	try_again_button.events.onInputOut.add(out, this);
 
 	try_again_text = game.add.text(0, 0, "Oops!\nYou did not\nwin enough\npoints!");
-	try_again_text.font = 'Arial Rounded';
+	try_again_text.font = 'Arial-Rounded';
 	try_again_text.fontSize = 55;
 	try_again_text.x = plate.x + plate.width / 2 - try_again_text.width / 2;
 	try_again_text.y = plate.y + (plate.height - try_again_button_image.height) / 2 - try_again_text.height / 2;
@@ -278,16 +283,16 @@ function make_win_screen() {
 	
 	win_banner = game.add.sprite(0, 0, "win_banner");
 	plate.x = CANV_W / 2 - plate.width / 2
-	win_banner.x = plate.x-3;
+	win_banner.x = plate.x-45;
 	
 	win_banner.y = plate.y;
 	win_banner.height = 200;
-	win_banner.width = plate.width+20;
+	win_banner.width = 600;
 	win_banner.visible = false;
 	
 	win_close_image = game.add.sprite(0, 0, "try_again");
-	win_close_image.width = 300;
-	win_close_image.height = 99;
+	win_close_image.width = 385;
+	win_close_image.height = 83;
 	win_close_image.x = plate.x + plate.width / 2 - win_close_image.width / 2;
 	win_close_image.y = plate.y + plate.height - win_close_image.height - 50;
 	win_close_image.visible = false;
@@ -309,16 +314,18 @@ function make_win_screen() {
 	win_close_button.events.onInputOut.add(out, this);
 
 	win_banner_text = game.add.text(0, 0, "Congratulations!");
-	win_banner_text.font = 'Arial Rounded';
+	win_banner_text.font = 'Arial-Rounded';
 	win_banner_text.fontSize = 40;
+	win_banner_text.fill = '#310639'
 	win_banner_text.x = win_banner.x + win_banner.width / 2 - win_banner_text.width / 2 - 10;
 	win_banner_text.y = win_banner.y + win_banner.height / 4 - win_banner_text.height / 2;
 	win_banner_text.align = 'center';
 	win_banner_text.visible = false;
 
-	win_text = game.add.text(0, 0, "You Win!");
-	win_text.font = 'Arial Rounded';
+	win_text = game.add.text(0, 0, "You have \n Won!");
+	win_text.font = 'Arial-Rounded';
 	win_text.fontSize = 60;
+	win_text.fill = '#310639'
 	win_text.align = 'center';
 	win_text.x = win_banner.x + win_banner.width / 2 - win_text.width / 2 - 10;
 	win_text.y = win_banner.y + win_banner.height - win_text.height / 4;
@@ -434,8 +441,8 @@ function hide_win_screen() {
 }
 
 function show_win_screen() {
-	win.play();
-	plate.width = 400;
+	
+	plate.width = 500;
 	plate.x = CANV_W / 2 - plate.width / 2;
 	console.log("winnnn....")
 	dim_background.visible = true;
@@ -512,13 +519,13 @@ function make_start_screen() {
 	start_text_top.fontSize = 55;
 	start_text_top.fill = '#310639'
 	start_text_top.x = plate.x + plate.width / 2 - start_text_top.width / 2;
-	start_text_top.y = plate.y + 50;
+	start_text_top.y = plate.y + 40;
 	start_text_top.align = 'center';
 	start_text_top.visible = false;
 
 
-	start_text_bot = game.add.text(0, 0, "Swipe Gems to match\n3 or more items.\nCollect\n" + SCORE_NEEDED + " Points\nin 15 moves")
-	start_text_bot.font = 'Arial Rounded';
+	start_text_bot = game.add.text(0, 0, "Swipe icons to make\ncombinations of 3\nor more. Collect\n" + SCORE_NEEDED + " Points\nin 15 moves or less")
+	start_text_bot.font = 'Arial-Rounded';
 	start_text_bot.fontSize = 40;
 	start_text_bot.x = plate.x + plate.width / 2 - start_text_bot.width / 2;
 	start_text_bot.y = plate.y + 250;
@@ -577,13 +584,13 @@ function show_try_again_screen() {
 
 function make_stat_text() {
 	moves_text = game.add.text(15, 15, "Moves Remaining: " + moves_left);
-	moves_text.font = 'Arial';
+	moves_text.font = 'Arial-Rounded';
 	moves_text.fontSize = 35;
 	moves_text.fill = '#ffffff';
 	moves_text.visible = false;
 
 	score_text = game.add.text(15, 15 + moves_text.height, "Score: " + score);
-	score_text.font = 'Arial';
+	score_text.font = 'Arial-Rounded';
 	score_text.fontSize = 35;
 	score_text.fill = '#ffffff';
 	score_text.visible = false;
@@ -614,6 +621,7 @@ function restart_game() {
 
 	gems.destroy();
 	start_game();
+	music.volume = 0.25;
 }
 
 function start_game() {
@@ -701,6 +709,8 @@ function slideGem(pointer, x, y) {
 					slide.play(forceRestart=false);
 					moves_left--;
 					tutorialHand.destroy();
+					tutorialHelp.destroy();
+					// tutorial_text.destroy();
 				}
 			}
 		}
@@ -992,17 +1002,38 @@ function boardRefilled() {
 		allowInput = true;
 		if(tutorial == true){
 			tutorial = false;
+	
+	
+			tutorialHelp = game.add.sprite(0, 0, "help");
+			tutorialHelp.width = 430;
+			tutorialHelp.height = 120;
+			tutorialHelp.x = CANV_W/2+40;
+			tutorialHelp.y = CANV_H/2-70;
+			tutorialHelp.bringToTop();
+
+	// tutorial_text = game.add.text(0, 0, "Slide icons to make \n combinations of 3 or more.");
+	// tutorial_text.font = 'Arial-Rounded';
+	// tutorial_text_text.fontSize = 32;
+	// tutorial_text.fill = '#310639'
+	// tutorial_text.align = 'center';
+	// tutorial_text.x = 200;
+	// tutorial_text.y = 400;
+	// tutorial_text.bringToTop();
+
 	tutorialHand = game.add.sprite(0, 0, "hand");
-	tutorialHand.width = 100;
-	tutorialHand.height = 100;
-	tutorialHand.x = CANV_W/2-20;
-	tutorialHand.y = CANV_H/2-190;
+	tutorialHand.width = 150;
+	tutorialHand.height = 150;
+	tutorialHand.x = CANV_W/2-35;
+	tutorialHand.y = CANV_H/2-180;
 	tutorialHand.bringToTop();
-	var tween = game.add.tween(tutorialHand).to( { y: tutorialHand.y +80 }, 1000, Phaser.Easing.inOut, true);
+	// var tween = game.add.tween(tutorialHand).to( { y: tutorialHand.y +80 }, 1000, Phaser.Easing.inOut, true);
+
+	
+	
 
     //  And this tells it to repeat, i.e. fade in again 10 times.
     //  The 1000 tells it to wait for 1 second before restarting the fade.
-    tween.repeat(200,1000)
+    // tween.repeat(200,1000)
 	}
 }
 }
